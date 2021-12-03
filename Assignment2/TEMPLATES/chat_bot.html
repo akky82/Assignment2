@@ -7,7 +7,7 @@
 <div class="container">
   <h2>Weather Bot</h2>
   <div class="body-text">
-    Welcome to Django Weather Services new Chatbot, Django!<br><br>
+    Welcome to Django Weather Services new Chat Bot, Django!<br><br>
     Begin by asking a question in the box below.<br><br>
   </div>
   <form action="" name="question" method="post" onSubmit="return ValidateQuestion();">
@@ -40,7 +40,7 @@
   <div class="row">
     Django says :
     <div class="comment2 chat-bot">
-      {{ reply }}
+      {{ reply|safe }}
     </div>
   </div>
   {% endif %}

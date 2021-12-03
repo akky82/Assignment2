@@ -35,8 +35,11 @@ class ChatBotView(View):
 
     @csrf_exempt
     def post(self, request):
+        question = request.POST['question']
+        reply = functions.ask_question(request.POST)
+
         form = ChatBotForm()
-        return render(request, 'chat_bot.html', {'form': form, 'question': 'does it work?', 'reply': 'It works'})
+        return render(request, 'chat_bot.html', {'form': form, 'question': question, 'reply': reply})
 
 
 class FeedbackView(View):

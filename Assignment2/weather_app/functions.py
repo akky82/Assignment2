@@ -3,11 +3,43 @@ from datetime import datetime
 import os
 import json
 import pytz
+from .forms import ChatBotForm
 from django.views.decorators.csrf import csrf_exempt
 
 
 api_key = "6a0c0dd6f5fe299a55e79d388afb256f"
 file_path = 'weather_app/files/feedback.json'
+
+
+def chat_bot():
+	pass
+
+
+def ask_question(request):
+	question = ''
+	reply = ''
+
+	if request:
+		form = ChatBotForm(request)
+		if form.is_valid():
+			question = form.cleaned_data['question']
+			keywords = question.strip("?").split()
+			print(keywords)
+			if "temperature" in keywords:
+				if "latitude" or "co-ordinates" in keywords:
+					lat = keywords[-2]
+					lon = keywords[-1]
+					weather_data = call_weather(lat, lon)
+
+					reply = "The temperature at the co-ordinates given is currently " \
+							+ str(weather_data['curr']) + "&deg;"
+				else:
+					city_name = keywords[-1]
+					reply = "The weather in " + city_name + " is fine."
+			else:
+				reply = "I'm sorry, I don't understand the question."
+
+	return reply
 
 
 # Make an API call to a openweathermap.org API using latitude and longitude co-ords
