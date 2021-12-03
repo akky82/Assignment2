@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Weather Bot{% endblock %}
+{% block heading %}Weather Bot{% endblock %}
+<!-- Start content -->
+{% block content %}
+<div class="container">
+  <h2>Weather Bot</h2>
+  <div class="body-text">
+    Welcome to Django Weather Services new Chatbot, Django!<br><br>
+    Begin by asking a question in the box below.<br><br>
+  </div>
+  <form action="" name="question" method="post" onSubmit="return ValidateQuestion();">
+{% csrf_token %}
+<!--{{ form.as_p}} -->
+  <div class="row">
+    <div class="label-wrapper">
+      <label for="{{ form.question.id_for_label }}">Question :</label>
+    </div>
+    <div class="input-wrapper">
+      {{ form.question }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="label-wrapper"></div>
+    <div class="input-wrapper">
+      <input type="submit" onclick="submit" value="Submit">&nbsp<input type="reset" value="Reset">
+    </div>
+  </div>
+  {% if question %}
+  <br><hr><br>
+  <div class="row">
+    You asked :
+    <div class="comment1 chat-bot" width="50%">
+      {{ question }}
+    </div>
+  </div><br><br>
+  {% endif %}
+  {% if reply %}
+  <div class="row">
+    Django says :
+    <div class="comment2 chat-bot">
+      {{ reply }}
+    </div>
+  </div>
+  {% endif %}
+  <br><hr><br>
+</div>
+<!-- End content -->
+{% endblock %}

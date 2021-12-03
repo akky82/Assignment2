@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Customer Feedback{% endblock %}
+{% block heading %}Customer Feedback{% endblock %}
+{% block jquery %}
+<script src="{% static 'js/feedback-jquery.js' %}"></script>
+{% endblock %}
+<!-- Start content -->
+{% block content %}
+<div class="container">
+  <div class="body-text">
+      This page allows you to provide feedback or leave a comment regarding our services.
+  </div>
+  <br>
+<form action="" name="feedback" method="post" onSubmit="return ValidateFeedback();">
+{% csrf_token %}
+<!--{{ form.as_p}} -->
+  <div class="row">
+    <div class="label-wrapper">
+      <label for="{{ form.firstName.id_for_label }}">First Name</label>
+    </div>
+    <div class="input-wrapper">
+      {{ form.firstName }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="label-wrapper">
+      <label for="{{ form.lastName.id_for_label }}">Last Name</label>
+    </div>
+    <div class="input-wrapper">
+      {{ form.lastName }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="label-wrapper">
+      <label for="{{ form.email.id_for_label }}">E-mail</label>
+    </div>
+    <div class="input-wrapper">
+      {{ form.email }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="label-wrapper">
+      <label for="{{ form.feedback.id_for_label }}">Feedback</label>
+    </div>
+    <div class="input-wrapper">
+      {{ form.feedback }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="label-wrapper"></div>
+    <div class="input-wrapper">
+      <input type="submit" onclick="submit" value="Submit">&nbsp<input type="reset" value="Reset">
+    </div>
+  </div>
+</form>
+  {% if messages %}
+  {% for message in messages %}
+  <br><div class="comment_message"><strong>{{ message }}</strong></div>
+  {% endfor %}
+  {% endif %}
+  <br><hr><br>
+  {% if feedback %}
+  <div class="row">Latest comments from the community...</div><br>
+  {% for x in feedback reversed %}
+  <div class="comment{% cycle '1' '2' %}{% if messages and forloop.counter == 1 %} new_comment{% endif %}">
+    <b>{{ x.firstName }} {{ x.lastName|slice:"1" }} - {{ x.time|slice:"10" }}</b><br>
+    <div class="body-text">{{ x.feedback|linebreaks }}</div>
+  </div><br>
+  {% endfor %}
+  {% endif %}
+</div>
+<!-- End content -->
+{% endblock %}
