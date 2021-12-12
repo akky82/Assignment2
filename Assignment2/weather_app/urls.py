@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from weather_app.views import FeedbackView, WeatherView, ChatBotView
+from weather_app.views import FeedbackView, WeatherView
 
 
 app_name = "weather_app"
@@ -13,5 +13,4 @@ urlpatterns = [
     path('privacy/', views.privacy),
     path('feedback/', FeedbackView.as_view(), name="feedback"),
     path('weather/', WeatherView.as_view(), name="weather"),
-    path('chat_bot/', ChatBotView.as_view(), name="chat_bot"),
 ]

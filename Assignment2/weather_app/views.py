@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from django.contrib import messages
-from .forms import FeedbackForm, WeatherForm, ChatBotForm
+from .forms import FeedbackForm, WeatherForm
 import json
 from . import functions
 from django.views.decorators.csrf import csrf_exempt
@@ -25,21 +25,6 @@ def disclaimer(request):
 
 def privacy(request):
     return render(request, 'privacy.html')
-
-
-class ChatBotView(View):
-    @csrf_exempt
-    def get(self, request):
-        form = ChatBotForm()
-        return render(request, 'chat_bot.html', {'form': form})
-
-    @csrf_exempt
-    def post(self, request):
-        question = request.POST['question']
-        reply = functions.ask_question(request.POST)
-
-        form = ChatBotForm()
-        return render(request, 'chat_bot.html', {'form': form, 'question': question, 'reply': reply})
 
 
 class FeedbackView(View):

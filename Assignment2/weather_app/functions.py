@@ -3,51 +3,18 @@ from datetime import datetime
 import os
 import json
 import pytz
-from .forms import ChatBotForm
 from django.views.decorators.csrf import csrf_exempt
-
 
 api_key = "6a0c0dd6f5fe299a55e79d388afb256f"
 file_path = 'weather_app/files/feedback.json'
 
 
-def chat_bot():
-	pass
-
-
-def ask_question(request):
-	question = ''
-	reply = ''
-
-	if request:
-		form = ChatBotForm(request)
-		if form.is_valid():
-			question = form.cleaned_data['question']
-			keywords = question.strip("?").split()
-			print(keywords)
-			if "temperature" in keywords:
-				if "latitude" or "co-ordinates" in keywords:
-					lat = keywords[-2]
-					lon = keywords[-1]
-					weather_data = call_weather(lat, lon)
-
-					reply = "The temperature at the co-ordinates given is currently " \
-							+ str(weather_data['curr']) + "&deg;"
-				else:
-					city_name = keywords[-1]
-					reply = "The weather in " + city_name + " is fine."
-			else:
-				reply = "I'm sorry, I don't understand the question."
-
-	return reply
-
-
-# Make an API call to a openweathermap.org API using latitude and longitude co-ords
+# Make an API call to a openweathermap.org API using latitude and longitude co-ords, or city name
 def call_weather(lat, lon):
 	if -90.0 <= float(lat) <= 90.0 and -180.0 <= float(lon) <= 180.0:
 		# URL to call 'onecall' API to get weather information
 		data_url = "https://api.openweathermap.org/data/2.5/onecall?lat=%s&lon=%s" \
-		           "&exclude=minute,hourly,alerts&units=metric&appid=%s" % (lat, lon, api_key)
+				   "&exclude=minute,hourly,alerts&units=metric&appid=%s" % (lat, lon, api_key)
 
 		# URL to call 'weather' API as 'onecall' does not contain name information
 		name_url = 'http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s' % (lat, lon, api_key)

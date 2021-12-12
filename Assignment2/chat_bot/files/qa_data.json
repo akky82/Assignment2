@@ -1,0 +1,38 @@
+[
+  {
+    "question": "Hello",
+    "answer": "Hi!"
+  },
+  {
+    "question": "Hi",
+    "answer": "Hello."
+  },
+  {
+    "question": "Good morning",
+    "answer": "Good morning to you too."
+  },
+  {
+    "question": "Good evening",
+    "answer": "Good evening to you too."
+  },
+  {
+    "question": "How are you?",
+    "answer": "Good, thanks for asking. How about you?"
+  },
+  {
+    "question": "I'm good",
+    "answer": "Glad to hear it."
+  },
+  {
+    "question": "Not good",
+    "answer": "Sorry to hear that."
+  },
+  {
+    "question": "How do I use this chat bot?",
+    "answer": "You can type in something that you want to know, such as temperature, humidity, sunset, followed by a city name or set of latitude/longitude co-ordinates (you can check how to do this in the details tab below."
+  },
+  {
+    "question": "What is your name?",
+    "answer": "My name is Django, and I can tell you about the weather in over 200,000 cities across the world."
+  }
+]
