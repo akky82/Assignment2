@@ -58,13 +58,13 @@ def ask_question(request):
 
 			# Check to see if the city name exists within the API database by checking for error 404
 			if weather_data['cod'] == '404':
-				reply = error_msg
+				reply = "Sorry, that city isn't in my database"
 				return reply
 
 			# Branch to respond based on keyword input by user, respond accordingly
 			if "temperature" in keywords:
 				reply = "The current temperature in " + weather_data['name'] \
-						+ " is " + str(weather_data['main']['temp']) + "&deg;"
+						+ " is " + str(weather_data['main']['temp']) + "&deg;C"
 			elif "humidity" in keywords:
 				reply = "The current humidity in " + weather_data['name'] \
 						+ " is " + str(weather_data['main']['humidity']) + "%"
@@ -80,6 +80,11 @@ def ask_question(request):
 				# print(datetime_converted)
 				# sunset = datetime.fromtimestamp(datetime_converted.strftime('%H:%M %p'))
 				reply = "The sunset in " + weather_data['name'] + " should be at " + str(sunset)
+			elif "weather" in keywords:
+				reply = "The current conditions in " + weather_data['name'] + " are " \
+						+ str(weather_data['weather'][0]['description']) + ", the temperature is " \
+						+ str(weather_data['main']['temp']) + "&deg;C, and the humidity is "\
+						+ str(weather_data['main']['humidity']) + "%"
 			else:
 				reply = error_msg
 
