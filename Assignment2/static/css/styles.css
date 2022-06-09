@@ -12,7 +12,7 @@
 }
 
 .heading-bg {
-  background-color: var(--text-primary);
+  background-color: red;
   border-radius: 6px;
   padding: 5px 20px;
 }
@@ -118,9 +118,9 @@ footer {
   width: 80%;
   border-radius: 6px;
   background-color: var(--bg-secondary);
-  padding: 20px;
-  min-height: 500px;
-}
+  padding: 20px;2
+  min-height: 500px;2
+}2
 
 .row:after {
   content: "";
